@@ -104,6 +104,14 @@ while :; do
 	   -d|--dev)
             DEV_VOLUME="--volume $PWD/jetson_voice:$DOCKER_ROOT/jetson_voice --volume $PWD/examples:$DOCKER_ROOT/examples --volume $PWD/scripts:$DOCKER_ROOT/scripts --volume $PWD/tests:$DOCKER_ROOT/tests"
             ;;
+	 -e|--display)
+            if [ "$2" ]; then
+                DISPLAY_VALUE="-e DISPLAY=$2"
+                shift
+            else
+                die 'ERROR: "-e" or "--display" requires a non-empty option argument.'
+            fi
+            ;;    
         -v|--volume)
             if [ "$2" ]; then
                 USER_VOLUME=" -v $2 "
@@ -176,7 +184,7 @@ if [ $ARCH = "aarch64" ]; then
 	sudo docker run --runtime nvidia -it --rm \
 		--name=$CONTAINER_NAME \
 		--network host \
-		$MOUNTS $CONTAINER_IMAGE $USER_COMMAND -e DISPLAY=192.168.1.63:0
+		$MOUNTS $CONTAINER_IMAGE $USER_COMMAND
   
      
 elif [ $ARCH = "x86_64" ]; then
