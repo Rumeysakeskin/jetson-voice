@@ -165,6 +165,7 @@ if [ -z "$CONTAINER_IMAGE" ]; then
 fi
 
 echo "CONTAINER:     $CONTAINER_IMAGE"
+echo "DISPLAY_VALUE: $DISPLAY_VALUE"
 echo "DEV_VOLUME:    $DEV_VOLUME"
 echo "DATA_VOLUME:   $DATA_VOLUME"
 echo "USER_VOLUME:   $USER_VOLUME"
@@ -185,7 +186,7 @@ if [ $ARCH = "aarch64" ]; then
 	sudo docker run --runtime nvidia -it --rm \
 		--name=$CONTAINER_NAME \
 		--network host \
-		$MOUNTS $CONTAINER_IMAGE $USER_COMMAND
+		$MOUNTS $DISPLAY_VALUE $CONTAINER_IMAGE $USER_COMMAND
 
 elif [ $ARCH = "x86_64" ]; then
 
@@ -195,6 +196,6 @@ elif [ $ARCH = "x86_64" ]; then
 		--shm-size=8g \
 		--ulimit memlock=-1 \
 		--ulimit stack=67108864 \
-		$MOUNTS $CONTAINER_IMAGE $USER_COMMAND
+		$MOUNTS $DISPLAY_VALUE $CONTAINER_IMAGE $USER_COMMAND
 		
 fi
