@@ -175,6 +175,7 @@ MOUNTS="\
 --device /dev/bus/usb \
 --volume /etc/timezone:/etc/timezone:ro \
 --volume /etc/localtime:/etc/localtime:ro \
+-v /tmp/.X11-unix:/tmp/.X11-unix \
 $DEV_VOLUME \
 $DATA_VOLUME \
 $USER_VOLUME"
@@ -185,8 +186,7 @@ if [ $ARCH = "aarch64" ]; then
 		--name=$CONTAINER_NAME \
 		--network host \
 		$MOUNTS $CONTAINER_IMAGE $USER_COMMAND
-  
-     
+
 elif [ $ARCH = "x86_64" ]; then
 
 	sudo docker run --gpus all -it --rm \
