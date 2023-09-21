@@ -177,7 +177,8 @@ if [ $ARCH = "aarch64" ]; then
 		--name=$CONTAINER_NAME \
 		--network host \
 		$MOUNTS $CONTAINER_IMAGE $USER_COMMAND -e DISPLAY=192.168.1.63:0
-	    
+  
+     
 elif [ $ARCH = "x86_64" ]; then
 
 	sudo docker run --gpus all -it --rm \
