@@ -176,6 +176,10 @@ MOUNTS="\
 --device /dev/bus/usb \
 --volume /etc/timezone:/etc/timezone:ro \
 --volume /etc/localtime:/etc/localtime:ro \
+--volume="/etc/group:/etc/group:ro" \
+--volume="/etc/passwd:/etc/passwd:ro" \
+--volume="/etc/shadow:/etc/shadow:ro" \
+--volume="/etc/sudoers.d:/etc/sudoers.d:ro" \
 -v /tmp/.X11-unix:/tmp/.X11-unix \
 $DEV_VOLUME \
 $DATA_VOLUME \
