@@ -111,7 +111,10 @@ while :; do
             else
                 die 'ERROR: "-e" or "--display" requires a non-empty option argument.'
             fi
-            ;;    
+            ;;  
+          -p|--port)
+	  shift
+            ;;  
         -v|--volume)
             if [ "$2" ]; then
                 USER_VOLUME=" -v $2 "
@@ -190,6 +193,7 @@ if [ $ARCH = "aarch64" ]; then
 	sudo docker run --runtime nvidia -it --rm \
 		--name=$CONTAINER_NAME \
 		--network host \
+                -p 2220:8888 \
 		$MOUNTS $DISPLAY_VALUE $CONTAINER_IMAGE $USER_COMMAND
 
 elif [ $ARCH = "x86_64" ]; then
