@@ -104,22 +104,6 @@ while :; do
 	   -d|--dev)
             DEV_VOLUME="--volume $PWD/jetson_voice:$DOCKER_ROOT/jetson_voice --volume $PWD/examples:$DOCKER_ROOT/examples --volume $PWD/scripts:$DOCKER_ROOT/scripts --volume $PWD/tests:$DOCKER_ROOT/tests"
             ;;
-	 -e|--env)
-            if [ "$2" ]; then
-                DISPLAY_VALUE=$2
-                shift
-            else
-                die 'ERROR: "-e" or "--env" requires a non-empty option argument.'
-            fi
-            ;;  
-	 -n|--net)
-            if [ "$2" ]; then
-                NET_VALUE=$2
-                shift
-            else
-                die 'ERROR: "-n" or "--net" requires a non-empty option argument.'
-            fi
-            ;; 
         -v|--volume)
             if [ "$2" ]; then
                 USER_VOLUME=" -v $2 "
@@ -173,8 +157,6 @@ if [ -z "$CONTAINER_IMAGE" ]; then
 fi
 
 echo "CONTAINER:     $CONTAINER_IMAGE"
-echo "DISPLAY_VALUE: $DISPLAY_VALUE"
-echo "NET_VALUE: $NET_VALUE"
 echo "DEV_VOLUME:    $DEV_VOLUME"
 echo "DATA_VOLUME:   $DATA_VOLUME"
 echo "USER_VOLUME:   $USER_VOLUME"
@@ -199,8 +181,8 @@ if [ $ARCH = "aarch64" ]; then
 	sudo docker run --runtime nvidia -it --rm \
 		--name=$CONTAINER_NAME \
 		--network host \
-                -p 2220:8888 \
-		$MOUNTS $DISPLAY_VALUE $NET_VALUE $CONTAINER_IMAGE $USER_COMMAND
+                 --env = %DISPLAY% \
+		$MOUNTS $CONTAINER_IMAGE $USER_COMMAND
 
 elif [ $ARCH = "x86_64" ]; then
 
@@ -210,6 +192,6 @@ elif [ $ARCH = "x86_64" ]; then
 		--shm-size=8g \
 		--ulimit memlock=-1 \
 		--ulimit stack=67108864 \
-		$MOUNTS $DISPLAY_VALUE $NET_VALUE $CONTAINER_IMAGE $USER_COMMAND
+		$MOUNTS $CONTAINER_IMAGE $USER_COMMAND
 		
 fi
