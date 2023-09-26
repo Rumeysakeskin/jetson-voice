@@ -106,7 +106,7 @@ while :; do
             ;;
 	 -e|--env)
             if [ "$2" ]; then
-                DISPLAY_VALUE="-e DISPLAY=$2"
+                DISPLAY_VALUE=$2
                 shift
             else
                 die 'ERROR: "-e" or "--env" requires a non-empty option argument.'
@@ -114,7 +114,7 @@ while :; do
             ;;  
 	 -n|--net)
             if [ "$2" ]; then
-                NET_VALUE="-n host=$2"
+                NET_VALUE=$2
                 shift
             else
                 die 'ERROR: "-n" or "--net" requires a non-empty option argument.'
