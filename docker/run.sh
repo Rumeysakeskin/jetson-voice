@@ -181,7 +181,7 @@ if [ $ARCH = "aarch64" ]; then
 	sudo docker run --runtime nvidia -it --rm \
 		--name=$CONTAINER_NAME \
 		--network host \
-                 --env = %DISPLAY% \
+                 --env DISPLAY \
 		$MOUNTS $CONTAINER_IMAGE $USER_COMMAND
 
 elif [ $ARCH = "x86_64" ]; then
