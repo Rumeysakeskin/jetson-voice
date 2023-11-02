@@ -175,9 +175,11 @@ RUN cd /opt && git clone --recursive --branch v${NEMO_VERSION} https://github.co
 # needed for nemo 1.6
 COPY patches/nemo/${NEMO_VERSION}/requirements.txt /opt/nemo/requirements/requirements.txt
 COPY patches/nemo/${NEMO_VERSION}/requirements_nlp.txt /opt/nemo/requirements/requirements_nlp.txt
+COPY patches/nemo/${NEMO_VERSION}/requirements_lightning.txt /opt/nemo/requirements/requirements_lightning.txt
 
 RUN pip3 install -r /opt/nemo/requirements/requirements.txt --verbose
 RUN pip3 install -r /opt/nemo/requirements/requirements_asr.txt --verbose
+RUN pip3 install -r /opt/nemo/requirements/requirements_lightning.txt --verbose
 RUN pip3 install -r /opt/nemo/requirements/requirements_nlp.txt --verbose
 RUN pip3 install -r /opt/nemo/requirements/requirements_tts.txt --verbose
 #RUN pip3 install omegaconf==2.1.0dev24 --verbose
