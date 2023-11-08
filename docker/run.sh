@@ -178,7 +178,7 @@ $USER_VOLUME"
 
 if [ $ARCH = "aarch64" ]; then
 
-	sudo docker run --runtime nvidia -it --rm \
+	sudo docker run --runtime nvidia -it --rm --gpus all \
 		--name=$CONTAINER_NAME \
 		--network host \
                  --env DISPLAY \
